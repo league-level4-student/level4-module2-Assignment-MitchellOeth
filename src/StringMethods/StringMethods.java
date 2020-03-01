@@ -6,7 +6,6 @@ import java.util.Base64;
 /*
 Visit the JavaDocs for the String class to view everything you can do with a String.  
 
-
 HINT:  Here are some String methods you might find useful 
 contains
 replace
@@ -20,7 +19,6 @@ lastIndexOf
 compareTo(IgnoreCase)
 substring
 
-
 Here are some Character methods you might find useful:
 Character.toLowerCase(char c);
 Character.isLetter(char c);
@@ -29,7 +27,6 @@ Character.getNumericValue(char c);
  */
 
 public class StringMethods {
-
 	// Given Strings s1 and s2, return the longer String
 	public static String longerString(String s1, String s2) {
 		if (s1.length() > s2.length()) {
@@ -38,103 +35,82 @@ public class StringMethods {
 		return s2;
 	}
 
-	
 	// if String s contains the word "underscores", change all of the spaces to underscores
 	public static String formatSpaces(String s) {
-		if (s.contains("underscores") == true) {
-//Not Done
-			s.replace(' ', '_');
+		if (s.contains("underscores")) {
+			s = s.replace(' ', '_');
 		}
-		return s;
+			return s;
 	}
-
 	
 	// Return the name of the person whose LAST name would appear first if they were in alphabetical order
 	// You cannot assume there are no extra spaces around the name, but you can
 	// assume there is only one space between the first and last name
 	public static String lineLeader(String s1, String s2, String s3) {
-// Confused
-		
-		
-		
-		
-//		for (int i = 0; i < s1.length(); i++) {
-//			if (s1.charAt(i) == ' ' && s1.charAt(i-1) != ' ' && s1.charAt(i+1) != ' ') {
-//				
-//			}
-//		}
+		s1 = s1.trim();
+		s2 = s2.trim();
+		s3 = s3.trim();
 		char a = ' ';
-		for (int i = 1; i < s1.length()-1; i++) {
-			if (s1.charAt(i) == ' ' && s1.charAt(0) == ' ') {
-				s1 = s1.substring(1);
-			}
-			if (s1.charAt(i) == ' ' && s1.charAt(i-1) != ' ' && s1.charAt(i+1) != ' ') {
+		char b = ' ';
+		char c = ' ';
+		for (int i = 0; i < s1.length(); i++) {
+			if (s1.charAt(i) == ' ') {
 				a = s1.charAt(i+1);
 			}
 		}
-		char b = ' ';
-		for (int i = 1; i < s2.length()-1; i++) {
-			if (s2.charAt(i) == ' ' && s2.charAt(0) == ' ') {
-				s2 = s2.substring(1);
-			}
-			if (s2.charAt(i) == ' ' && s2.charAt(i-1) != ' ' && s2.charAt(i+1) != ' ') {
+		for (int i = 0; i < s2.length(); i++) {
+			if (s2.charAt(i) == ' ') {
 				b = s2.charAt(i+1);
 			}
 		}
-		char c = ' ';
-		for (int i = 1; i < s3.length()-1; i++) {
-			if (s3.charAt(i) == ' ' && s3.charAt(0) == ' ') {
-				s3 = s3.substring(1);
-			}
-			if (s3.charAt(i) == ' ' && s3.charAt(i-1) != ' ' && s3.charAt(i+1) != ' ') {
+		for (int i = 0; i < s3.length(); i++) {
+			if (s3.charAt(i) == ' ') {
 				c = s3.charAt(i+1);
 			}
 		}
 		if (Character.getNumericValue(a) < Character.getNumericValue(b) && Character.getNumericValue(a) < Character.getNumericValue(c)) {
-			System.out.println(s1);
 			return s1;
-		} else if (Character.getNumericValue(b) < Character.getNumericValue(c) && Character.getNumericValue(b) < Character.getNumericValue(a)) {
-			System.out.println(s2);
+		} else if (Character.getNumericValue(b) < Character.getNumericValue(c)) {
 			return s2;
-		} else if (Character.getNumericValue(c) < Character.getNumericValue(b) && Character.getNumericValue(c) < Character.getNumericValue(a)) {
-			System.out.println(s3);
+		} else {
 			return s3;
 		}
-
-		return null;
 	}
-	
 	
 	// Return the sum of all numerical digits in the String
 	public static int numeralSum(String s) {
 		int a = 0;
 		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == 1) {
+			switch (s.charAt(i)) {
+			case '1':
 				a += 1;
-			}
-			if (s.charAt(i) == 2) {
+				break;
+			case '2':
 				a += 2;
-			}
-			if (s.charAt(i) == 3) {
+				break;
+			case '3':
 				a += 3;
-			}
-			if (s.charAt(i) == 4) {
+				break;
+			case '4':
 				a += 4;
-			}
-			if (s.charAt(i) == 5) {
+				break;
+			case '5':
 				a += 5;
-			}
-			if (s.charAt(i) == 6) {
+				break;
+			case '6':
 				a += 6;
-			}
-			if (s.charAt(i) == 7) {
+				break;
+			case '7':
 				a += 7;
-			}
-			if (s.charAt(i) == 8) {
+				break;
+			case '8':
 				a += 8;
-			}
-			if (s.charAt(i) == 9) {
+				break;
+			case '9':
 				a += 9;
+				break;
+			default:
+				break;
 			}
 		}
 		return a;
@@ -143,12 +119,33 @@ public class StringMethods {
 	
 	// Return the number of times String substring appears in String s
 	public static int substringCount(String s, String substring) {
-		return 0;
+		int times = 0;
+		boolean wholeSubstring = false;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == substring.charAt(0)) {
+				for (int j = 0; j < substring.length(); j++) {
+					if (substring.charAt(j) == s.charAt(i+j)) {
+						wholeSubstring = true;
+					} else {
+						wholeSubstring = false;
+					}
+				}
+				if (wholeSubstring == true) {
+					times++;
+				}
+			}
+		}
+		return times;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
-		return null;
+		byte[] a = {};
+		for (int i = 0; i < s.length(); i++) {
+			a[i] = (byte) s.charAt(i);
+		}
+		s = Utilities.encrypt(a, (byte) key);
+		return s;
 	}
 
 	// Call Utilities.decrypt to decrypt the cyphertext
