@@ -155,7 +155,8 @@ public class StringMethods {
 	public static int wordsEndsWithSubstring(String s, String substring) {
 		int numWords = 0;
 		for (int i = 0; i <= s.length() - substring.length(); i++) {
-			if (s.substring(i, i + substring.length()).equals(substring) && ((s.charAt(i+substring.length()) == ' ') || (i == s.length() - substring.length()))) {
+			if (s.substring(i, i + substring.length()).equals(substring) && s.charAt(i + substring.length()) == ' ') {
+					//&& ((s.charAt(i+substring.length()) == ' ') || (i == s.length() - substring.length()))) {
 				numWords ++;
 			}
 		}
@@ -166,14 +167,37 @@ public class StringMethods {
 	// of String substring and the final occurrence
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
-		return 0;
+		int first = 0;
+		int last = 0;
+		for (int i = 0; i <= s.length() - substring.length(); i++) {
+			if (s.substring(i, i + substring.length()).equals(substring)) {
+				if (first == 0) {
+					first = i + substring.length();
+				}
+				last = i;
+			}
+		}
+		return last-first;
 	}
 
 
 	// Return true if String s is a palindrome
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
-	public static boolean palindrome(String s) {
+	public static boolean palindrome(String s) {	
+		String out = "";
+		for (int i = 0; i < s.length(); i++) {
+			if ((s.charAt(i) != ' ') && (s.charAt(i) != ',') && (s.charAt(i) != '.') && (s.charAt(i) != '–') && (s.charAt(i) != ':') && (s.charAt(i) != '?')) {
+				out += s.charAt(i);
+			}
+		}
+		out = out.toLowerCase();
+		String a = out;
+		for (int i = out.length(); i > 0; i--) {
+			
+		}
+		System.out.println(out);
+
 		return true;
 	}
 	
@@ -197,3 +221,4 @@ class Utilities {
 		return new String(b);
 	}
 }
+	
