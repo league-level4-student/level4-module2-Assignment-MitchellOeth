@@ -192,13 +192,18 @@ public class StringMethods {
 			}
 		}
 		out = out.toLowerCase();
-		String a = out;
-		for (int i = out.length(); i > 0; i--) {
-			
+
+		char[] a = out.toCharArray();
+		String b = "";
+		for (int i = out.length() - 1; i >= 0; i--) {
+			b += a[i];
 		}
 		System.out.println(out);
-
-		return true;
+		System.out.println(b);
+		if (b.equals(out)) {
+			return true;
+		}
+		return false;
 	}
 	
 }
